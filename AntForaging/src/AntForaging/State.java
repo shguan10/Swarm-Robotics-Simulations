@@ -10,16 +10,21 @@ package AntForaging;
  * @author Xinyu
  */
 class State {
-    int numAnts=0;
-    
-    public void updatePhom(){
+
+    int numAnts = 0;
+
+    public String toString() {
+        return "numAnts: " + numAnts;
     }
-    
-    public void addAnt(){
+
+    public void updatePhom() {
+    }
+
+    public void addAnt() {
         numAnts++;
     }
-    
-    public void removeAnt(){
+
+    public void removeAnt() {
         numAnts--;
     }
 }
