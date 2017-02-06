@@ -29,7 +29,7 @@ public class Ant {
 
     void decideGoNextState() {
         double[] col = Simulation.runningTotalMatrix[state];
-
+        
         //random int in range (0,w-1)
         Random rand = new Random();
         double chance = rand.nextDouble() * col[col.length - 1];
@@ -37,10 +37,10 @@ public class Ant {
         //searches for the decision
         int i = 0;
         for (; i < col.length; i++) {
-            if (col[i] > chance) {
+            if (col[i] >= chance) {
                 break;
             }
         }
-        setState(i + 2);
+        setState(i);
     }
 }

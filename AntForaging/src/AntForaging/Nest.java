@@ -10,5 +10,7 @@ package AntForaging;
  * @author Xinyu
  */
 public class Nest extends State{
-    
+    Nest(){
+        numAnts=Simulation.NUMANTS;
+    }
 }

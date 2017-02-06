@@ -12,11 +12,37 @@ package AntForaging;
 class State {
 
     int numAnts = 0;
-
+    boolean isActive=true;
+    int timeOut;//time before the state is active
+    
+    public void setTimeOut(int i){
+        timeOut=i;
+        if(i!=0)isActive=false;
+        else isActive=true;
+    }
+    
+    public void decreaseTimeOut(){
+        setTimeOut(timeOut-1);
+    }
+    
+    public boolean isActive() {
+        return isActive;
+    }
+    public void setIsActive(boolean isOn) {
+        isActive = isOn;
+    }
+    public int getNumAnts(){
+        return numAnts;
+    }
+    
     public String toString() {
         return "numAnts: " + numAnts;
     }
 
+    public double getPhom() {
+        return 0;
+    }
+    
     public void updatePhom() {
     }
 
