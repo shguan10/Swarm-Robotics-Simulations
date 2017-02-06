@@ -9,16 +9,20 @@ package AntForaging;
  *
  * @author Xinyu
  */
-public class FoodSource {
+public class FoodSource extends State{
 
     private int x, y, amount;
     private boolean isActive;
     public static final int defaultAmount=100;
     private int timeOut;//time before the FoodSource is active
+    private double phom =0;
+    
     
     //the furthest the foodSource could be from the nest (origin)
     static public final int MAXXdist=200;
     static public final int MAXYdist=200;
+    public static final double phomDecayK = 2;
+    public static final double phomAddK = 4;
     
     FoodSource(int X, int Y, int A) {
         isActive = true;
@@ -35,6 +39,15 @@ public class FoodSource {
         timeOut=0;
     }
 
+    public void updatePhom(){
+        double change = phomAddK*numAnts/getDistance()-phomDecayK*phom;
+        if(change>-phom)phom+=change;
+    }
+    
+    public double getPhom(){
+        return phom;
+    }
+    
     public void setIsActive(boolean isOn){
         isActive=isOn;
     }
@@ -57,7 +70,7 @@ public class FoodSource {
     }
 
     //returns the amount of food left at this source
-    public int getAmount() {
+    public int returnAmount() {
         return amount;
     }
 
