@@ -17,8 +17,7 @@ class State {
     
     public void setTimeOut(int i){
         timeOut=i;
-        if(i!=0)isActive=false;
-        else isActive=true;
+        isActive = i == 0;
     }
     
     public void decreaseTimeOut(){

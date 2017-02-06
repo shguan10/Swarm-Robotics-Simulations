@@ -15,17 +15,17 @@ import java.util.Random;
 public class Simulation {
 
     static final int timesToRun = 50000;
-    static final int TIMESTEPS = 9000;
+    static final int TIMESTEPS = 135000;
     static final int NUMANTS = 100;
-    static final int NUMFOOD = 50;
+    static final int NUMFOOD = 10;
 
     static final int defaultHomeFreeWeight = 1;
     static final int defaultFreeHomeWeight = 1;
-    static final double homeFoodWeightK = 50;
+    static final double homeFoodWeightK = 10;
     static final double foodHomeWeightK = 10;
-    static final double freeFoodWeightK = 50;
+    static final double freeFoodWeightK = 10;
     static final double defaultFreeFood = 2;
-
+                            
     static Ant[] ants = new Ant[NUMANTS];
 
     public static ArrayList<State> states = new ArrayList<>();
@@ -39,9 +39,12 @@ public class Simulation {
         Random rand = new Random();
 
         System.out.println("Begin Simulation");
-        int expected=0;
-        for(int iterate=0;iterate<timesToRun;iterate++){
-            if(iterate%100==0)System.out.println(iterate);
+        int expected = 0;
+        for (int iterate = 0; iterate < timesToRun; iterate++) {
+            if (iterate % 100 == 0) {
+                System.out.println(iterate);
+                System.out.println("Expected results so far: "+expected);
+            }
             for (int i = 0; i < NUMANTS; i++) {
                 ants[i] = new Ant();
             }
@@ -52,9 +55,9 @@ public class Simulation {
             for (int i = 0; i < NUMFOOD; i++) {
                 int xpos = rand.nextInt(FoodSource.MAXXdist * 2 + 1) - FoodSource.MAXXdist;
                 int ypos = rand.nextInt(FoodSource.MAXYdist * 2 + 1) - FoodSource.MAXYdist;
-                double dist = Math.pow(xpos*xpos+ypos*ypos+0.0,.5);
-                int timeOut = rand.nextInt((int)(TIMESTEPS/2/dist+1.0));
-                states.add(new FoodSource(xpos, ypos, timeOut,FoodSource.defaultAmount - i));
+                double dist = Math.pow(xpos * xpos + ypos * ypos + 0.0, .5);
+                int timeOut = rand.nextInt((int) (TIMESTEPS / 2 / dist + 1.0));
+                states.add(new FoodSource(xpos, ypos, timeOut, FoodSource.defaultAmount - i));
                 //System.out.println(states.get(i + 2));
             }
             //initialize transitionMatrix
@@ -82,28 +85,34 @@ public class Simulation {
                     a.decideGoNextState();
                 }
                 updateMatrix();
-                for(State s: states)if(!s.isActive())s.decreaseTimeOut();
+                for (State s : states) {
+                    if (!s.isActive()) {
+                        s.decreaseTimeOut();
+                    }
+                }
             }
             //write phom levels to output
-            double highestPhomState[]={0,0};//{index, phom}
-            double closestState[]={2,((FoodSource)states.get(2)).getDistance()};
-            for (int i=0;i<states.size();i++){
-                State s=states.get(i);
+            double highestPhomState[] = {0, 0};//{index, phom}
+            double closestState[] = {2, ((FoodSource) states.get(2)).getDistance()};
+            for (int i = 0; i < states.size(); i++) {
+                State s = states.get(i);
                 //System.out.println(s);
-                if(s.getPhom()>highestPhomState[1]){
-                    highestPhomState[0]=i;
-                    highestPhomState[1]=s.getPhom();
+                if (s.getPhom() > highestPhomState[1]) {
+                    highestPhomState[0] = i;
+                    highestPhomState[1] = s.getPhom();
                 }
-                if(i>2&&((FoodSource)s).getDistance()<closestState[1]){
-                    closestState[0]=i;
-                    closestState[1]=((FoodSource)s).getDistance();
+                if (i > 2 && ((FoodSource) s).getDistance() < closestState[1]) {
+                    closestState[0] = i;
+                    closestState[1] = ((FoodSource) s).getDistance();
                 }
             }
             //System.out.println("\n\nClosest State: "+((FoodSource)states.get((int)closestState[0]))+"\nState with highest phom: "+((FoodSource)states.get((int)highestPhomState[0])));
-            if(closestState[0]==highestPhomState[0])expected++;
+            if (closestState[0] == highestPhomState[0]) {
+                expected++;
+            }
             states.removeAll(states);
         }
-        System.out.println("Expected results: "+expected);
+        System.out.println("Expected results: " + expected);
     }
 
     private static void updateMatrix() {
@@ -118,7 +127,9 @@ public class Simulation {
 
         //update freespace column
         for (int i = 2; i < transitionMatrix[1].length; i++) {//TODO include a/A +R
-            if(states.get(i).isActive())transitionMatrix[1][i] = ((FoodSource) states.get(i)).getPhom() * freeFoodWeightK + defaultFreeFood;
+            if (states.get(i).isActive()) {
+                transitionMatrix[1][i] = ((FoodSource) states.get(i)).getPhom() * freeFoodWeightK + defaultFreeFood;
+            }
         }
 
         for (int i = 2; i < transitionMatrix.length; i++) {
