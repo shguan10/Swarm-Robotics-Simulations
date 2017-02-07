@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AntForaging;
 
 import java.util.ArrayList;
@@ -90,7 +85,7 @@ public class Simulation {
 					}
 				}
 				r.render(states);
-				printMatrix();
+				//printMatrix();
 			}
 			//write phom levels to output
 			double highestPhomState[] = {0, 0};//{index, phom}

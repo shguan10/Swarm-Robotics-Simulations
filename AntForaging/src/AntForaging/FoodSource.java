@@ -18,7 +18,8 @@ public class FoodSource extends State {
     //the furthest the foodSource could be from the nest (origin)
     static public final int MAXXdist = 200;
     static public final int MAXYdist = 200;
-    public static final double phomDecayK = 10000000;
+    
+    public static final double phomDecayK = .5;
     public static final double phomAddK = 4;
 
     FoodSource(int X, int Y, int A) {
