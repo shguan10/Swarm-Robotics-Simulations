@@ -9,7 +9,7 @@ import java.util.Random;
 public class Simulation {
 
 	static final int timesToRun = 50000;
-	static final int TIMESTEPS = 135000;
+	static final int TIMESTEPS = 5000;
 	static final int NUMANTS = 100;
 	static final int NUMFOOD = 10;
 
@@ -84,7 +84,7 @@ public class Simulation {
 						s.decreaseTimeOut();
 					}
 				}
-				r.render(states);
+				r.render(states, t);
 				//printMatrix();
 			}
 			//write phom levels to output
