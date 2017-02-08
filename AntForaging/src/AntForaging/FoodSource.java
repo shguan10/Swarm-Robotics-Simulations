@@ -11,16 +11,14 @@ package AntForaging;
  */
 public class FoodSource extends State {
 
-    private int x, y, amount;
     public static final int defaultAmount = 100;
-    private double phom = 0;
-
     //the furthest the foodSource could be from the nest (origin)
-    static public final int MAXXdist = 200;
-    static public final int MAXYdist = 200;
-    
-    public static final double phomDecayK = .5;
+    static public final int MAXXdist = Renderer.width / 2;
+    static public final int MAXYdist = Renderer.height / 2;
+    public static final double phomDecayK = .1;
     public static final double phomAddK = 4;
+    private int x, y, amount;
+    private double phom = 0;
 
     FoodSource(int X, int Y, int A) {
         isActive = true;
@@ -40,7 +38,7 @@ public class FoodSource extends State {
 
     FoodSource(int xpos, int ypos, int timeOut, int i) {
         setTimeOut(timeOut);
-        isActive = true;
+        //isActive = true;
         x = xpos;
         y = ypos;
         amount = i;

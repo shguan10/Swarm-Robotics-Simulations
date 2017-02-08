@@ -11,9 +11,9 @@ import java.util.ArrayList;
  */
 public class Renderer extends Canvas {
 
+	public static final int height = 720;
+	public static final int width = height;
 	public JFrame frame;
-	private int height = 720;
-	private int width = height;
 	private String title = "Ant Foraging Swarm";
 
 	private Graphics2D g2;
@@ -24,7 +24,7 @@ public class Renderer extends Canvas {
 		frame = new JFrame(title);
 		frame.add(this);
 		frame.pack();
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -67,18 +67,25 @@ public class Renderer extends Canvas {
 
 	private void drawPathTo(FoodSource foodSource) {
 		g2.setColor(Color.red);
-		g2.setStroke(new BasicStroke((float) foodSource.getPhom() * 10));
+		if (foodSource.getPhom() != 0) {
+//		g2.setStroke(new BasicStroke((float) (200.0 / (1 + Math.pow(Math.E, -1 * foodSource.getPhom() / 100))) - 100));
+			g2.setStroke(new BasicStroke((float) foodSource.getPhom() * 50));
 		g2.draw(new Line2D.Double(width / 2, height / 2, foodSource.getX() + (width / 2), foodSource.getY() + (height / 2)));
+		}
 	}
 
 	private void drawFoodSource(FoodSource foodSource) {
-		g2.setColor(Color.blue);
-		g2.fillOval(foodSource.getX() + (width / 2) - 5, foodSource.getY() + (height / 2) - 5, 10, 10);
+		if (foodSource.isActive) {
+			g2.setColor(Color.blue);
+		} else {
+			g2.setColor(Color.green);
+		}
+		g2.fillOval(foodSource.getX() + (width / 2) - 6, foodSource.getY() + (height / 2) - 6, 12, 12);
 	}
 
 	private void drawNest() {
 		g2.setColor(Color.magenta);
-		g2.fillRect(width / 2 - 8, height / 2 - 8, 16, 16);
+		g2.fillOval(width / 2 - 8, height / 2 - 8, 16, 16);
 	}
 
 	private void testText(String text) {

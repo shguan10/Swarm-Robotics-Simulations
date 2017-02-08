@@ -8,17 +8,17 @@ import java.util.Random;
  */
 public class Simulation {
 
-	static final int timesToRun = 50000;
-	static final int TIMESTEPS = 5000;
+	static final int timesToRun = 1000;
+	static final int TIMESTEPS = 1000;
 	static final int NUMANTS = 100;
-	static final int NUMFOOD = 10;
+	static final int NUMFOOD = 50;
 
 	static final int defaultHomeFreeWeight = 1;
 	static final int defaultFreeHomeWeight = 1;
 	static final double homeFoodWeightK = 10;
 	static final double foodHomeWeightK = 10;
 	static final double freeFoodWeightK = 10;
-	static final double defaultFreeFood = 2;
+	static final double defaultFreeFood = 50;
 	public static ArrayList<State> states = new ArrayList<>();
 	public static double[][] transitionMatrix = new double[NUMFOOD + 2][NUMFOOD + 2];//[fromIndex][toIndex], 0 is nest, 1 is free space
 	public static double[][] runningTotalMatrix = new double[NUMFOOD + 2][NUMFOOD + 2];//[fromIndex][toIndex], 0 is nest, 1 is free space
@@ -50,7 +50,7 @@ public class Simulation {
 				int xpos = rand.nextInt(FoodSource.MAXXdist * 2 + 1) - FoodSource.MAXXdist;
 				int ypos = rand.nextInt(FoodSource.MAXYdist * 2 + 1) - FoodSource.MAXYdist;
 				double dist = Math.pow(xpos * xpos + ypos * ypos + 0.0, .5);
-				int timeOut = rand.nextInt((int) (TIMESTEPS / 2 / dist + 1.0));
+				int timeOut = rand.nextInt((int) (TIMESTEPS / dist * 3 + 1.0));
 				states.add(new FoodSource(xpos, ypos, timeOut, FoodSource.defaultAmount - i));
 				//System.out.println(states.get(i + 2));
 			}
@@ -84,7 +84,12 @@ public class Simulation {
 						s.decreaseTimeOut();
 					}
 				}
-				r.render(states, t);
+//				try {
+//					Thread.sleep(50);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				r.render(states, t);
 				//printMatrix();
 			}
 			//write phom levels to output
