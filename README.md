@@ -3,6 +3,11 @@ This is the code for the simulations of multi-agent systems done for a research 
 
 I was responsible for the algorithms behind the ants and logic for the simulation. The Renderer was written by a colleague.
 
+## Demo
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=K-Hoj9BqWXQ
+" target="_blank"><img src="http://img.youtube.com/vi/K-Hoj9BqWXQ/0.jpg" 
+alt="Youtube demo" width="240" height="180" border="10" /></a>
+
 ## Publication
 Our work was published in the 2017 Modern Artificial Intelligience and Cognitive Science Conference.
 
