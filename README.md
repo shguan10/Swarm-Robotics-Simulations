@@ -14,4 +14,4 @@ Our work was published in the 2017 Modern Artificial Intelligience and Cognitive
 S.Kazadi, G. Jeno, X. Guan, N. Nusgart, A. Sheptunov. Decision making swarms. Proceedings of the 28th Modern Artificial Intelligence and Cognitive Science Conference, Fort Wayne, Indiana, 2017.
 
 ## Conference Presentation
-Here is the <a href="https://shguan10.github.io/MAICSswarm.pdf" target="_blank">slide deck</a> that I used to present our work at the conference.
+Here is the <a href="https://shguan10.github.io/misc/MAICSswarm.pdf" target="_blank">slide deck</a> that I used to present our work at the conference.
